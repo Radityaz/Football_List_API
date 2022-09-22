@@ -67,7 +67,11 @@ class _ListAllFootbalState extends State<ListAllFootbal> {
                                   margin: EdgeInsets.only(right: 20),
                                   width: 30,
                                   height: 30,
-                                  child: Image.network(premiereLeagueModel!.teams![index].strTeamBadge.toString())),
+                                  child: FadeInImage.assetNetwork(
+                                    placeholder: "Image/loading.gif",
+                                    image: premiereLeagueModel!.teams![index].strTeamBadge.toString(),
+                                  )
+                  ),
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -75,7 +79,7 @@ class _ListAllFootbalState extends State<ListAllFootbal> {
                                       .teams![index].strTeam
                                       .toString()),
                                   Text(premiereLeagueModel!
-                                      .teams![index].strWebsite
+                                      .teams![index].strSport
                                       .toString()),
                                 ],
                               )

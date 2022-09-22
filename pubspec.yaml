@@ -36,6 +36,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   url_launcher: ^6.1.5
   http: ^0.13.5
+  readmore: ^2.2.0
 
 dev_dependencies:
   flutter_test:
@@ -64,6 +65,7 @@ flutter:
     - Image/instagram.png
     - Image/twitter.png
     - Image/youtube.png
+    - Image/loading.gif
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:football_list/PremiereLeagueModel.dart';
+import 'package:readmore/readmore.dart';
 
 class DetailPage extends StatefulWidget {
   DetailPage({Key? key, required this.teams}) : super(key: key);
@@ -28,42 +29,94 @@ class _DetailPageState extends State<DetailPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.teams.strTeam.toString()),
+        title: Text("Detail Page"),
       ),
       body: SingleChildScrollView(
-        child: Center(
           child: Container(
             child: Column( 
               children: [
-                Container(
-                  margin: const EdgeInsets.all(10),
-                  width: 150,
-                  height: 150,
-                  child: Image.network(widget.teams.strTeamBadge.toString()),
+                  Container(
+ 
+                  child: FadeInImage.assetNetwork(
+                    placeholder: "Image/loading.gif", placeholderScale: 2.5,
+                    image: widget.teams.strTeamBanner.toString(),
+                  ),
                 ),
                 Container(
-                margin: const EdgeInsets.only(bottom: 20, top: 10),  
+                  margin: EdgeInsets.only(bottom: 5),
+                  color: Color.fromARGB(255, 53, 53, 53),
+                  child: Row(
+                    children: [
+                      Container(
+                        margin: EdgeInsets.only(left: 10,top: 5,bottom: 5),
+                        width: 90,
+                        height: 90,
+                        child: Container(
+                          child: FadeInImage.assetNetwork(
+                          placeholder: "Image/loading.gif", placeholderScale: 2.5,
+                          image: widget.teams.strTeamBadge.toString(),
+                  ),
+                ),
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(margin: EdgeInsets.only(left: 10), child: Text(widget.teams.strTeam.toString(),style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold, color: Colors.white),),),
+                          Container(margin: EdgeInsets.only(left: 10,top: 23), child: Text("Also Known as " + widget.teams.strTeamShort.toString(),style: TextStyle(color: Colors.white),),),
+                          Container(margin: EdgeInsets.only(left: 10), child: Text("A football Club From  " + widget.teams.strCountry.toString(),style: TextStyle(color: Colors.white)),),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+                Container(child: Text(widget.teams.strTeam.toString() + " Stadium"),),
+                  Container(
+                  margin: const EdgeInsets.all(5),
+                  width: 250,
+                  height: 150,
+                  child: FadeInImage.assetNetwork(
+                    placeholder: "Image/loading.gif", placeholderScale: 2.5,
+                    image: widget.teams.strStadiumThumb.toString(),
+                  ),
+                ),                
+                Container(
+                margin: const EdgeInsets.only(top: 10),  
                 child: Text(widget.teams.strStadium.toString(),style: TextStyle(fontWeight: FontWeight.bold) ),
                 ),
                 Container(
-                  margin: const EdgeInsets.only(left: 10),
+                margin: const EdgeInsets.only(top: 5),  
+                child: Text(widget.teams.strStadiumLocation.toString()),
+                ),
+                Container(
+                  margin: const EdgeInsets.only(left: 10,top: 10),
                   width: MediaQuery.of(context).size.width,
                   child: Text("Description:" , style: TextStyle(fontWeight: FontWeight.bold),),
 
                 ),
                 Container(
                 margin: const EdgeInsets.all(10),
-                child: Text(widget.teams.strDescriptionEN.toString()),
-                ),
+                child: ReadMoreText(
+                  widget.teams.strStadiumDescription.toString(),
+                    trimLines: 2, trimCollapsedText: 'Show more',trimExpandedText: 'Show less',
+                      moreStyle: TextStyle(
+                        fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.blue),
+                          lessStyle: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.blue),
+                          )),
                 Container(
                   width: MediaQuery.of(context).size.width,
                   margin: EdgeInsets.only(top: 5, bottom: 5,left: 10),
                   child: Text("More About " + widget.teams.strTeam.toString(), style: TextStyle(fontWeight: FontWeight.bold),),
                 ),
+                
                 Row(
                   children: [
                     Container(
-                      margin: EdgeInsets.only(left: 10),
+                      margin: EdgeInsets.only(left: 10, ),
                       child: InkWell(
                           onTap: () {
                             var myUrl =
@@ -93,12 +146,12 @@ class _DetailPageState extends State<DetailPage> {
                           child: Image(image: AssetImage("Image/twitter.png"),height: 25, width: 25,)),
                         ),
                   ],
-                )
+                ),
+                SizedBox(height: 30,)
               ],
             ),
           ),
         ),
-      ),
-    );
+      );
   }
 }
